@@ -279,7 +279,7 @@ def draw_background(args)
     w: 1280,
     h: 720,
     path: "sprites/background.jpg"
-  }.sprite
+  }.sprite!
 end
 
 def touch_down(args, idx)
@@ -450,7 +450,7 @@ def draw_gameplay args
     g: 0,
     b: 0,
     a: 255
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 16,
@@ -462,7 +462,7 @@ def draw_gameplay args
     g: 155,
     b: 255,
     a: 255
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 16,
@@ -474,7 +474,7 @@ def draw_gameplay args
     g: 155,
     b: 255,
     a: 255
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 16,
@@ -486,7 +486,7 @@ def draw_gameplay args
     g: 155,
     b: 255,
     a: 255
-  }.label
+  }.label!
   
   if !is_mobile
     args.outputs.primitives << {
@@ -499,7 +499,7 @@ def draw_gameplay args
       g: 155,
       b: 255,
       a: 255
-    }.label
+    }.label!
   else
     args.outputs.primitives << {
       x: 1210,
@@ -511,7 +511,7 @@ def draw_gameplay args
       g: 255,
       b: 255,
       a: 255
-    }.label
+    }.label!
   end
   
   if args.state.player_alive == 0
@@ -527,7 +527,7 @@ def draw_gameplay args
       g: 0,
       b: 255,
       a: args.state.game_over_label_alpha
-    }.label
+    }.label!
     
     if args.state.game_over_label_alpha >= 255
       args.outputs.primitives << {
@@ -540,7 +540,7 @@ def draw_gameplay args
         g: 255,
         b: 255,
         a: 255
-      }.label
+      }.label!
     end
   end
   
@@ -562,17 +562,17 @@ def draw_gameplay_vpad args
     g: 255,
     b: 255,
     a: args.state.vpad_alpha
-  }.sprite
+  }.sprite!
   
   args.outputs.primitives << args.state.vpad_recs[0].merge({
     path: "sprites/XboxSeriesX_A.png",
     a: args.state.vpad_alpha
-  }).sprite
+  }).sprite!
   
   args.outputs.primitives << args.state.vpad_recs[1].merge({
     path: "sprites/XboxSeriesX_B.png",
     a: args.state.vpad_alpha
-  }).sprite
+  }).sprite!
   
   if args.state.dev == 1 && !is_mobile
     draw_gameplay_vpad_layout args
@@ -586,7 +586,7 @@ def draw_gameplay_vpad_layout args
       g: 0,
       b: 0,
       a: args.state.vpad_alpha
-    }).border
+    }).border!
   end
 end
 
@@ -598,7 +598,7 @@ def draw_gameplay_enemies args
     args.outputs.primitives << args.state.enemies[i].merge({
       w: 64,
       h: 64,
-    }).sprite
+    }).sprite!
   end
 end
 
@@ -610,7 +610,7 @@ def draw_gameplay_player args
       w: 256,
       h: 256,
       path: "sprites/pass_player.png",
-    }.sprite
+    }.sprite!
   
     args.state.player_center_x = (args.state.world_center_x + args.state.player_dist * Math::cos(args.state.angle * 3.14 / 180)) - 64
     args.state.player_center_y = (args.state.world_center_y.from_top + args.state.player_dist * Math::sin(args.state.angle * 3.14 / 180)) - 72
@@ -622,7 +622,7 @@ def draw_gameplay_player args
       h: 96,
       path: "sprites/playerShip3_blue.png",
       angle: args.state.angle
-    }.sprite
+    }.sprite!
   end
 end
 
@@ -635,7 +635,7 @@ def draw_gameplay_bullets args
       w: 32,
       h: 32,
       path: "sprites/laserBlue08.png"
-    }).sprite
+    }).sprite!
   end
   
   args.state.offside_bullets.length.times.map do |i|
@@ -646,7 +646,7 @@ def draw_gameplay_bullets args
       w: 32,
       h: 32,
       path: "sprites/laserBlue08.png"
-    }).sprite
+    }).sprite!
   end
   
   args.state.bullets.delete_if do |bullet|
@@ -749,14 +749,14 @@ def draw_selection_rect args
       g: 155,
       b: 255,
       a: 255,
-    }).border
+    }).border!
   elsif args.state.current_scene == 3
     args.outputs.primitives << args.state.select_game_difficulty_recs[args.state.game_difficulty_selection].merge({
       r: 35,
       g: 155,
       b: 255,
       a: 255
-    }).border
+    }).border!
   elsif args.state.current_scene == 5
     args.outputs.primitives << {
       x: 0,
@@ -767,7 +767,7 @@ def draw_selection_rect args
       g: 155,
       b: 255,
       a: 255,
-    }.solid
+    }.solid!
   end
 end
 
@@ -1020,7 +1020,7 @@ def draw_demo args
     w: 256,
     h: 256,
     path: "sprites/pass_player.png",
-  }.sprite
+  }.sprite!
   
   # Check for collision with this rect and shoot
   if args.state.demo_enemies.length > 0
@@ -1051,7 +1051,7 @@ def draw_demo args
   
   args.state.demo_gun_activated = nearest_enemy.merge({ w: 64, h: 64 }).intersect_rect?(zone) ? 1 : 0
   
-  #args.outputs.primitives << zone.merge({ r: 255, g: 0, b: 0, a: 255 }).border
+  #args.outputs.primitives << zone.merge({ r: 255, g: 0, b: 0, a: 255 }).border!
   
   args.state.demo_player_center_x = (args.state.demo_world_center_x + args.state.demo_player_dist * Math::cos(args.state.demo_angle * 3.14 / 180)) - 64
   args.state.demo_player_center_y = (args.state.demo_world_center_y.from_top + args.state.demo_player_dist * Math::sin(args.state.demo_angle * 3.14 / 180)) - 72
@@ -1069,7 +1069,7 @@ def draw_demo args
     args.outputs.primitives << args.state.demo_enemies[i].merge({
       w: 64,
       h: 64,
-    }).sprite
+    }).sprite!
   end
   
   args.state.demo_bullets.length.times.map do |i|
@@ -1080,7 +1080,7 @@ def draw_demo args
       w: 32,
       h: 32,
       path: "sprites/laserBlue08.png"
-    }).sprite
+    }).sprite!
   end
   
   args.state.demo_offside_bullets.length.times.map do |i|
@@ -1091,7 +1091,7 @@ def draw_demo args
       w: 32,
       h: 32,
       path: "sprites/laserBlue08.png"
-    }).sprite
+    }).sprite!
   end
   
   args.state.demo_bullets.delete_if do |bullet|
@@ -1105,7 +1105,7 @@ def draw_demo args
     h: 96,
     path: "sprites/playerShip3_blue.png",
     angle: args.state.demo_angle
-  }.sprite
+  }.sprite!
   
   args.state.demo_offside_bullets.delete_if do |offside_bullet|
     offside_bullet.x < 0 || offside_bullet.x > 1280 || offside_bullet.y < 0 || offside_bullet.y > 720
@@ -1336,7 +1336,7 @@ def main_menu args
     g: 0,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   if args.state.played_game_previously == 1
     args.outputs.primitives << {
@@ -1349,7 +1349,7 @@ def main_menu args
       g: 255,
       b: 255,
       a: 255,
-    }.label
+    }.label!
   end
   
   args.outputs.primitives << {
@@ -1362,7 +1362,7 @@ def main_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 920,
@@ -1374,7 +1374,7 @@ def main_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 920,
@@ -1386,7 +1386,7 @@ def main_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 32,
@@ -1398,7 +1398,7 @@ def main_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 32,
@@ -1409,7 +1409,7 @@ def main_menu args
     g: 0,
     b: 255,
     a: 255,
-  }.line
+  }.line!
   
   args.outputs.primitives << {
     x: 32,
@@ -1421,7 +1421,7 @@ def main_menu args
     g: 0,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 32,
@@ -1433,7 +1433,7 @@ def main_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 32,
@@ -1445,7 +1445,7 @@ def main_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 32,
@@ -1457,7 +1457,7 @@ def main_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 32,
@@ -1469,7 +1469,7 @@ def main_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   if !is_mobile
     draw_selection_rect args
@@ -1492,7 +1492,7 @@ def credits_menu args
     g: 0,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 440,
@@ -1504,7 +1504,7 @@ def credits_menu args
     g: 140,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 460,
@@ -1516,7 +1516,7 @@ def credits_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 440,
@@ -1528,7 +1528,7 @@ def credits_menu args
     g: 140,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 510,
@@ -1536,7 +1536,7 @@ def credits_menu args
     w: 256,
     h: 256,
     path: "sprites/dragonruby.png"
-  }.sprite
+  }.sprite!
   
   args.outputs.primitives << {
     x: 8,
@@ -1548,7 +1548,7 @@ def credits_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   if !is_mobile
     selection_rect_input args
@@ -1572,7 +1572,7 @@ def pause_menu args
     g: 0,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   if !is_mobile
     draw_selection_rect args
@@ -1589,7 +1589,7 @@ def pause_menu args
       g: 255,
       b: 255,
       a: 255,
-    }.label
+    }.label!
   end
   
   if !is_mobile
@@ -1612,7 +1612,7 @@ def select_game_difficulty args
     g: 0,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << args.layout.rect({
     col: 4.5,
@@ -1624,7 +1624,7 @@ def select_game_difficulty args
     g: 255,
     b: 255,
     a: 255,
-  }).border
+  }).border!
   
   args.outputs.primitives << {
     x: 420,
@@ -1636,7 +1636,7 @@ def select_game_difficulty args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 325,
@@ -1648,7 +1648,7 @@ def select_game_difficulty args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << args.layout.rect({
     col: 4.5,
@@ -1660,7 +1660,7 @@ def select_game_difficulty args
     g: 255,
     b: 255,
     a: 255,
-  }).border
+  }).border!
   
   args.outputs.primitives << {
     x: 480,
@@ -1672,7 +1672,7 @@ def select_game_difficulty args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 285,
@@ -1684,7 +1684,7 @@ def select_game_difficulty args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 8,
@@ -1696,7 +1696,7 @@ def select_game_difficulty args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   if !is_mobile
     draw_selection_rect args
@@ -1743,7 +1743,7 @@ def how_to_play_menu args
     g: 0,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 100,
@@ -1755,7 +1755,7 @@ def how_to_play_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   left_arr.length.times.map do |i|
     args.outputs.primitives << {
@@ -1764,7 +1764,7 @@ def how_to_play_menu args
       w: 96,
       h: 96,
       path: left_arr[i]
-    }.sprite
+    }.sprite!
   end
   
   args.outputs.primitives << {
@@ -1777,7 +1777,7 @@ def how_to_play_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   right_arr.length.times.map do |i|
     args.outputs.primitives << {
@@ -1786,7 +1786,7 @@ def how_to_play_menu args
       w: 96,
       h: 96,
       path: right_arr[i]
-    }.sprite
+    }.sprite!
   end
   
   args.outputs.primitives << {
@@ -1799,7 +1799,7 @@ def how_to_play_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   shoot_forward_arr.length.times.map do |i|
     args.outputs.primitives << {
@@ -1808,7 +1808,7 @@ def how_to_play_menu args
       w: 96,
       h: 96,
       path: shoot_forward_arr[i]
-    }.sprite
+    }.sprite!
   end
   
   args.outputs.primitives << {
@@ -1821,7 +1821,7 @@ def how_to_play_menu args
     g: 155,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   shoot_backward_arr.length.times.map do |i|
     args.outputs.primitives << {
@@ -1830,7 +1830,7 @@ def how_to_play_menu args
       w: 96,
       h: 96,
       path: shoot_backward_arr[i]
-    }.sprite
+    }.sprite!
   end
   
   args.outputs.primitives << {
@@ -1842,7 +1842,7 @@ def how_to_play_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   args.outputs.primitives << {
     x: 8,
@@ -1854,7 +1854,7 @@ def how_to_play_menu args
     g: 255,
     b: 255,
     a: 255,
-  }.label
+  }.label!
   
   if !is_mobile
     selection_rect_input args
